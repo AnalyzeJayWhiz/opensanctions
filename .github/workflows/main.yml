@@ -1,0 +1,29 @@
+name: OpenSanctions Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.12'  # Set the appropriate Python version
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libicu-dev libsnappy-dev build-essential
+        python -m pip install --upgrade pip
+        python -m pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
+
+    - name: Run OpenSanctions Script
+      run: |
+        python /home/runner/work/opensanctions/opensanctions/your_script.py  # Path to your Python script
