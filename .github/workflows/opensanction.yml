@@ -1,10 +1,6 @@
 name: Run OpenSanctions1 Script
 
 on:
-  schedule:
-    # This cron expression means the script will run every day at 12:00 AM UTC
-    - cron: "23 10 * * *"
-
   workflow_dispatch: # This allows you to run the workflow manually
 
 jobs:
@@ -31,3 +27,10 @@ jobs:
     # Run the Python script that includes both crawl and export
     - name: Run OpenSanctions script1
       run: python ./opensanctions/your_script.py
+
+    # Upload exported data as an artifact
+    - name: Upload Exported Data
+      uses: actions/upload-artifact@v3
+      with:
+        name: exported-data
+        path: /home/runner/work/opensanctions/opensanctions  # Path to the exported data folder
