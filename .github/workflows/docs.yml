@@ -9,6 +9,11 @@ permissions:
   contents: read
   pages: write
   id-token: write
+- name: Enable and Configure Pages
+  uses: actions/configure-pages@v5
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    enablement: true
 
 concurrency:
   group: "pages"
