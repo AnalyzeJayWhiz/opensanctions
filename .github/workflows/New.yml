@@ -1,0 +1,36 @@
+name: Run Open Sanctions Script
+
+on:
+  workflow_dispatch: # This allows you to run the workflow manually
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13.0'  # Specify your required Python version
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libicu-dev libsnappy-dev build-essential
+        pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
+        pip install -e ./zavod[dev]
+        pip install -r opensanctions/contrib/delta/requirements.txt
+
+    # Run the Python script that includes both crawl and export
+    - name: Run Open Sanctions script
+      run: python ./opensanctions/your_script.py
+
+    # Upload exported data as an artifact
+    - name: Upload Exported Data
+      uses: actions/upload-artifact@v3
+      with:
+        name: exported-data
+        path: /home/runner/work/opensanctions/opensanctions  # Path to the exported data folder
