@@ -1,13 +1,9 @@
-name: Run OpenSanctions Script and Lint
+name: lint_crawlers
 
 on:
-  schedule:
-    # This cron expression runs the workflow every day at 10:30 AM UTC, which is 4:00 PM IST
-    - cron: "50 10 * * *"
-  
-  push:
-  pull_request:
-  workflow_dispatch:  # Allows manual runs
+  - push
+  - pull_request
+  - workflow_dispatch
 
 jobs:
   lint:
@@ -19,7 +15,7 @@ jobs:
         uses: tj-actions/changed-files@v45
         with:
           files: 'datasets/**/*.y*ml'
-      - name: Lint modified dataset yamls
+      - name: Lint modiied dataset yamls
         if: ${{ steps.changed-yamls.outputs.all_changed_files != '' }}
         run: |
           yamllint ${{ steps.changed-yamls.outputs.all_changed_files }}
@@ -46,38 +42,3 @@ jobs:
               ruff check $dataset
               black --check --diff $dataset
           done
-
-  run-python-script:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python environment
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12.0'
-      - name: Install scikit-learn manually
-        run: pip install scikit-learn==1.5.0
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libicu-dev libsnappy-dev build-essential
-          pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
-          pip install -e ./zavod[dev]
-          pip install -r opensanctions/contrib/delta/requirements.txt
-
-      # Run the Python script that includes both the crawl and export
-      - name: Run OpenSanctions script
-        run: python your_script.py  # Make sure this path points to your Python file
-
-      # Commit and push the changes (exported data) back to the repository
-      - name: Commit and push exported data
-        run: |
-          git config --local user.email "github-actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add /home/runner/work/opensanctions/opensanctions  # Path to your export folder
-          git commit -m "Add exported data"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This token is automatically provided by GitHub Actions
