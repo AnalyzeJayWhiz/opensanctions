@@ -1,0 +1,38 @@
+name: Run OpenSanctions1 Script
+
+on:
+  workflow_dispatch: # This allows you to run the workflow manually
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13.0' # Specify your required Python version
+
+      - name: Install dependencies
+        run: |
+          pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
+          pip install -e ./zavod[dev]
+          pip install -r opensanctions/contrib/delta/requirements.txt
+
+      - name: Run OpenSanctions script
+        run: python ./opensanctions/<your_script_name>.py
+
+      # Commit and push the exported data back to the repository (if allowed)
+      - name: Commit and push exported data (Optional)
+        if: ${{ github.event.inputs.push_data == 'true' }}  # Add a workflow input for pushing
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add /home/runner/work/opensanctions/opensanctions  # Path to your export folder
+          git commit -m "Add exported data"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
