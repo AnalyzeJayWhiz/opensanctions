@@ -1,0 +1,50 @@
+name: Run Python Script on Schedule
+
+jobs:
+  run-etl-process:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Install system dependencies
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libicu-dev libsnappy-dev build-essential
+
+      # Install Python dependencies
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
+
+      # Install OpenSanctions and additional requirements
+      - name: Install OpenSanctions and additional requirements
+        run: |
+          pip install -e ./zavod[dev]
+          pip install -r ./opensanctions/contrib/delta/requirements.txt
+
+      # Run your ETL script (Python file)
+      - name: Run Python script
+        run: |
+          python your_script.py  # Replace with the actual Python script you're using
+
+      # Commit the exported data to repository (if needed)
+      - name: Commit exported data to repository
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Automated data export"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This uses GitHub's token to authenticate the push
