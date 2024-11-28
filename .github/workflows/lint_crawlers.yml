@@ -3,7 +3,7 @@ name: Run OpenSanctions Script and Lint
 on:
   schedule:
     # This cron expression runs the workflow every day at 10:30 AM UTC, which is 4:00 PM IST
-    - cron: "45 10 * * *"
+    - cron: "50 10 * * *"
   
   push:
   pull_request:
