@@ -1,11 +1,17 @@
-name: Run Python Script on Schedule
+name: GitHub Pages Deployment
+
+on:
+  push:
+    branches:
+      - main  # Trigger when pushing to the 'main' branch. Change this if needed.
+  workflow_dispatch:  # Allows manual triggering of the workflow from GitHub UI
 
 jobs:
-  run-etl-process:
+  configure-pages:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
+      # Checkout repository code
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -27,24 +33,39 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
 
-      # Install OpenSanctions and additional requirements
-      - name: Install OpenSanctions and additional requirements
-        run: |
-          pip install -e ./zavod[dev]
-          pip install -r ./opensanctions/contrib/delta/requirements.txt
-
-      # Run your ETL script (Python file)
-      - name: Run Python script
+      # Run your Python ETL script (this is where your script is executed)
+      - name: Run Python ETL script
         run: |
           python your_script.py  # Replace with the actual Python script you're using
 
-      # Commit the exported data to repository (if needed)
-      - name: Commit exported data to repository
+      # Set up GitHub Pages (GitHub Pages Configuration)
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true  # Ensures Pages is enabled in repository settings
+          branch: gh-pages  # Specifies the branch for GitHub Pages (e.g., 'gh-pages')
+
+      # Build your site (if you need to build the site before pushing to Pages)
+      # For example, if you're using a static site generator like Jekyll, replace with your actual build commands
+      - name: Build the Site
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add .
-          git commit -m "Automated data export"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This uses GitHub's token to authenticate the push
+          # Example of building the site. Replace with actual commands to build your site
+          echo "Building the site..."
+          # Example: jekyll build --destination _site
+
+      # Deploy the site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        run: |
+          # Push the built site to the gh-pages branch
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout -b gh-pages
+          git add -A
+          git commit -m "Deploy site to GitHub Pages"
+          git push -f origin gh-pages  # Push to the gh-pages branch
+
+      # Clean up: Optionally, clean up any unnecessary files or branches
+      - name: Clean up
+        run: |
+          echo "Cleaning up..."
+          # Any cleanup commands you may need
