@@ -1,0 +1,28 @@
+name: Run OpenSanctions Script
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:
+    # Allow manual trigger via GitHub UI
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Ensure your dependencies are listed here
+
+      - name: Run the Python script
+        run: |
+          python scripts/my_colab_script.py  # Update with the path to your script
