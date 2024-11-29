@@ -55,5 +55,5 @@ subprocess.run(['zavod', 'crawl', dataset_path], check=True)
 os.environ['ZAVOD_RESOLVER_PATH'] = os.path.join(drive_folder, 'opensanctions', 'zavod', 'zavod', 'resolver')
 
 # Run zavod export with the correct path for GitHub Actions
-export_path = os.path.join(drive_folder, 'opensanctions')  # Adjust this based on your repo structure
+export_path = os.path.join(drive_folder, 'analysis')  # Adjust this based on your repo structure
 subprocess.run(['zavod', 'export', export_path], check=True)
