@@ -21,4 +21,4 @@ jobs:
 
       - name: Run the Python script
         run: |
-          python scripts/my_colab_script.py  # Update with the path to your script
+          python my_colab_script.py  # Update with the path to your script
