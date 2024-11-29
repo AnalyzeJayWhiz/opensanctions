@@ -8,10 +8,6 @@ Original file is located at
 """
 
 import os
-import subprocess
-import sys
-
-import os
 import sys
 import subprocess
 
@@ -22,11 +18,7 @@ os.makedirs(drive_folder, exist_ok=True)
 # Change working directory to the folder where the data will be stored
 os.chdir(drive_folder)
 
-# Install system dependencies (without sudo in GitHub Actions)
-subprocess.run(['apt-get', 'update'], check=True)
-subprocess.run(['apt-get', 'install', '-y', 'libicu-dev', 'libsnappy-dev', 'build-essential'], check=True)
-
-# Install required Python packages
+# Install required Python packages using pip (without system-level dependencies)
 subprocess.run([sys.executable, '-m', 'pip', 'install', 'pyicu', 'plyvel', 'xlrd', 'normality', 'zavod', 'rigour', 'nomenklatura'], check=True)
 
 # Install OpenSanctions and other dependencies
