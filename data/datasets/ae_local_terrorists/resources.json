@@ -3,7 +3,7 @@
     {
       "name": "entities.delta.json",
       "url": "https://data.opensanctions.org/datasets/20241202/ae_local_terrorists/entities.delta.json",
-      "checksum": "13dd534f9cf32735025fe01326e9a7b6f8234bdb",
+      "checksum": "04954ffa63bc0bef107c34ddfd8611e0501b4a75",
       "mime_type": "application/json",
       "mime_type_label": "JavaScript Object Notation",
       "title": "Delta files",
@@ -13,7 +13,7 @@
     {
       "name": "entities.ftm.json",
       "url": "https://data.opensanctions.org/datasets/20241202/ae_local_terrorists/entities.ftm.json",
-      "checksum": "67a3001c3273b01cf20b0a033feba1152cb3e2c8",
+      "checksum": "827868a7f7498f40e8edb89430a203c8bb640732",
       "mime_type": "application/json+ftm",
       "mime_type_label": "FollowTheMoney Entities",
       "title": "FollowTheMoney entities",
@@ -23,7 +23,7 @@
     {
       "name": "names.txt",
       "url": "https://data.opensanctions.org/datasets/20241202/ae_local_terrorists/names.txt",
-      "checksum": "355c97b24b3be6c5c02dc5ffd393d670f2e260e4",
+      "checksum": "c6d2dfc06a2c169d87cea593e72314f30e334cec",
       "mime_type": "text/plain",
       "mime_type_label": "Plain text",
       "title": "Target names text file",
@@ -33,7 +33,7 @@
     {
       "name": "senzing.json",
       "url": "https://data.opensanctions.org/datasets/20241202/ae_local_terrorists/senzing.json",
-      "checksum": "d0029d8cf5bc256c96812b1cbdb5d881c44853c6",
+      "checksum": "0e9b492e2ecb54bf97452aac8eaa3388623fbbde",
       "mime_type": "application/json+senzing",
       "mime_type_label": "json+senzing",
       "title": "Senzing entity format",
@@ -53,7 +53,7 @@
     {
       "name": "statistics.json",
       "url": "https://data.opensanctions.org/datasets/20241202/ae_local_terrorists/statistics.json",
-      "checksum": "54285157c6aac431ec12b30e187bf7bbea17c2c9",
+      "checksum": "317070bd44a7632c603f8c90b02a4d27013ff978",
       "mime_type": "application/json",
       "mime_type_label": "JavaScript Object Notation",
       "title": "Dataset statistics",
@@ -63,7 +63,7 @@
     {
       "name": "targets.nested.json",
       "url": "https://data.opensanctions.org/datasets/20241202/ae_local_terrorists/targets.nested.json",
-      "checksum": "c3a0286033054c72610d5a2bcb1c57c01f596f28",
+      "checksum": "181f008c11098d79fb4d8ddb9a72fdbb3a737f5a",
       "mime_type": "application/json",
       "mime_type_label": "JavaScript Object Notation",
       "title": "Targets as nested JSON",
