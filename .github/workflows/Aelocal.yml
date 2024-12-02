@@ -57,6 +57,7 @@ jobs:
         run: |
           git config --global user.name "AnalyzeJayWhiz"
           git config --global user.email "jaymehta130@gmail.com"
-          git add ./data/datasets/ae_local_terrorists/*  # Ensure the correct path is added here
+          git add -f ./data/datasets/ae_local_terrorists/*  # Force add ignored files
           git commit -m "Add ETL output"
           git push origin main
+
