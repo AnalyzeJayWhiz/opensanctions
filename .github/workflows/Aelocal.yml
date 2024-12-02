@@ -23,14 +23,6 @@ jobs:
           pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
           pip install -e './zavod[dev]'
 
-      - name: Fix nomenklatura compatibility issues
-        run: |
-          sed -i 's/from typing import TYPE_CHECKING, typing.Any/from typing import TYPE_CHECKING, Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
-          sed -i 's/from typing import TYPE_CHECKING, Self/from typing import TYPE_CHECKING, Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
-          sed -i '1i import typing' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
-          sed -i 's/self: Self/self: Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
-          sed -i 's/Self/Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
-
       - name: Run ETL Process (Crawl)
         run: |
           zavod crawl ./datasets/ae/local_terrorists/ae_local_terrorists.yml
