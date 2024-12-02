@@ -1,0 +1,48 @@
+name: ETL Process for UAE Local Terrorist List
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs daily at midnight
+  workflow_dispatch:  # Allows manual triggers
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install system dependencies (without sudo)
+        run: |
+          apt-get update
+          apt-get install -y libicu-dev libsnappy-dev build-essential
+
+      - name: Install required Python packages
+        run: |
+          pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
+
+      - name: Install OpenSanctions and other dependencies
+        run: |
+          pip install -e ./zavod[dev]
+
+      - name: Fix nomenklatura compatibility issues
+        run: |
+          sed -i 's/from typing import TYPE_CHECKING, typing.Any/from typing import TYPE_CHECKING, Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
+          sed -i 's/from typing import TYPE_CHECKING, Self/from typing import TYPE_CHECKING, Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
+          sed -i '1i import typing' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
+          sed -i 's/self: Self/self: Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
+          sed -i 's/Self/Any/g' $(python -c "import nomenklatura; print(nomenklatura.__path__[0])")/dataset/dataset.py
+
+      - name: Run ETL Process (Crawl)
+        run: |
+          zavod crawl ./datasets/ae/local_terrorists/ae_local_terrorists.yml
+
+      - name: Run ETL Export
+        run: |
+          zavod export ./datasets/ae/local_terrorists/ae_local_terrorists.yml
