@@ -2,7 +2,7 @@ name: ETL Process for UAE Local Terrorist List
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Runs daily at midnight
+    - cron: "0 0 * * *"  # Runs daily
   workflow_dispatch:  # Allows manual triggers
 
 jobs:
@@ -16,19 +16,17 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: 3.x
+          python-version: '3.x'
 
-      - name: Install system dependencies (without sudo)
-        run: |
-          apt-get update
-          apt-get install -y libicu-dev libsnappy-dev build-essential
+      - name: Install system dependencies
+        uses: fkirc/skip-duplicate-actions@v4.1.0
+        with:
+          apt-get: true
+          apt-get-packages: libicu-dev,libsnappy-dev,build-essential
 
-      - name: Install required Python packages
+      - name: Install Python dependencies
         run: |
           pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
-
-      - name: Install OpenSanctions and other dependencies
-        run: |
           pip install -e ./zavod[dev]
 
       - name: Fix nomenklatura compatibility issues
@@ -46,3 +44,11 @@ jobs:
       - name: Run ETL Export
         run: |
           zavod export ./datasets/ae/local_terrorists/ae_local_terrorists.yml
+
+      - name: Save ETL Output to Repository
+        run: |
+          git config --global user.name "Your Name"
+          git config --global user.email "you@example.com"
+          git add ./path-to-output-folder/*
+          git commit -m "Add ETL output"
+          git push origin main
