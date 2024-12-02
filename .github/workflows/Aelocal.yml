@@ -49,3 +49,14 @@ jobs:
       - name: Find targets.nested.json file
         run: |
           find . -name "targets.nested.json"
+      - name: List all untracked files
+        run: |
+          git status
+
+      - name: Commit ETL output to repository
+        run: |
+          git config --global user.name "AnalyzeJayWhiz"
+          git config --global user.email "jaymehta130@gmail.com"
+          git add ./data/datasets/ae_local_terrorists/*  # Ensure the correct path is added here
+          git commit -m "Add ETL output"
+          git push origin main
