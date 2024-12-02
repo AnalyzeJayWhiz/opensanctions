@@ -41,12 +41,16 @@ jobs:
 
       - name: Run ETL Export
         run: |
-          zavod export ./datasets/ae/local_terrorists/ae_local_terrorists.yml
+          zavod export ./datasets/ae/local_terrorists/ae_local_terrorists.yml --output ./datasets/ae/local_terrorists/output/
 
-      - name: Save ETL Output to Repository
+      - name: List output folder
+        run: |
+          ls -la ./datasets/ae/local_terrorists/output/
+
+      - name: Commit ETL output to repository
         run: |
           git config --global user.name "AnalyzeJayWhiz"
           git config --global user.email "jaymehta130@gmail.com"
-          git add ./datasets/*
+          git add ./datasets/ae/local_terrorists/output/*
           git commit -m "Add ETL output"
           git push origin main
