@@ -16,18 +16,17 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: 3.x
 
       - name: Install system dependencies
-        uses: fkirc/skip-duplicate-actions@v4.1.0
-        with:
-          apt-get: true
-          apt-get-packages: libicu-dev,libsnappy-dev,build-essential
+        run: |
+          apt-get update
+          apt-get install -y libicu-dev libsnappy-dev build-essential
 
       - name: Install Python dependencies
         run: |
           pip install pyicu plyvel xlrd normality zavod rigour nomenklatura
-          pip install -e ./zavod[dev]
+          pip install -e './zavod[dev]'
 
       - name: Fix nomenklatura compatibility issues
         run: |
@@ -47,8 +46,8 @@ jobs:
 
       - name: Save ETL Output to Repository
         run: |
-          git config --global user.name "Your Name"
-          git config --global user.email "you@example.com"
-          git add ./path-to-output-folder/*
+          git config --global user.name "AnalyzeJayWhiz"
+          git config --global user.email "jaymehta130@gmail.com"
+          git add ./analysis/*
           git commit -m "Add ETL output"
           git push origin main
