@@ -38,19 +38,14 @@ jobs:
       - name: Set ZAVOD_RESOLVER_PATH
         run: |
           echo "ZAVOD_RESOLVER_PATH=${GITHUB_WORKSPACE}/zavod/zavod/resolver" >> $GITHUB_ENV
+      - name: Create directories
+        run: |
+          mkdir -p ./data    
 
       - name: Run ETL Export
         run: |
-          zavod export ./datasets/ae/local_terrorists/ae_local_terrorists.yml --output ./datasets/ae/local_terrorists/output/
+          zavod export ./datasets/ae/local_terrorists/ae_local_terrorists.yml
 
-      - name: List output folder
+      - name: Find targets.nested.json file
         run: |
-          ls -la ./datasets/ae/local_terrorists/output/
-
-      - name: Commit ETL output to repository
-        run: |
-          git config --global user.name "AnalyzeJayWhiz"
-          git config --global user.email "jaymehta130@gmail.com"
-          git add ./datasets/ae/local_terrorists/output/*
-          git commit -m "Add ETL output"
-          git push origin main
+          find . -name "targets.nested.json"
