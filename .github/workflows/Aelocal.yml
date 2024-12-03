@@ -59,7 +59,5 @@ jobs:
           git config --global user.email "jaymehta130@gmail.com"
           git add -f ./data/datasets/ae_local_terrorists/*  # Force add ignored files
           git commit -m "Add ETL output"
-          git add -f ./datasets/ae/local_terrorists/output/targets.simple.csv
-          git commit -m "Force commit of updated CSV"
           git push origin main
 
