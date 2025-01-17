@@ -2,8 +2,8 @@
   "resources": [
     {
       "name": "entities.delta.json",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/entities.delta.json",
-      "checksum": "edd8a16e30a3d194d580954431db95061edde677",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/entities.delta.json",
+      "checksum": "3c81833f2bd0a2ddb9475ca806eeaf44c2d84c5e",
       "mime_type": "application/json",
       "mime_type_label": "JavaScript Object Notation",
       "title": "Delta files",
@@ -12,8 +12,8 @@
     },
     {
       "name": "entities.ftm.json",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/entities.ftm.json",
-      "checksum": "f2abe787f25d814a21bfacf957ba92c91bcace22",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/entities.ftm.json",
+      "checksum": "38fc5cf8a631328d39a7439ec5a60f03761be2e7",
       "mime_type": "application/json+ftm",
       "mime_type_label": "FollowTheMoney Entities",
       "title": "FollowTheMoney entities",
@@ -22,8 +22,8 @@
     },
     {
       "name": "names.txt",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/names.txt",
-      "checksum": "2a236bfe17df22fbe675e6999a6a1b190dc746fe",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/names.txt",
+      "checksum": "90cf6bdcafc1c5102dfdee256524fd3db20a6b41",
       "mime_type": "text/plain",
       "mime_type_label": "Plain text",
       "title": "Target names text file",
@@ -32,8 +32,8 @@
     },
     {
       "name": "senzing.json",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/senzing.json",
-      "checksum": "c82ef7bc544fa53f1126d55412881c8c1ce8509a",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/senzing.json",
+      "checksum": "d0029d8cf5bc256c96812b1cbdb5d881c44853c6",
       "mime_type": "application/json+senzing",
       "mime_type_label": "json+senzing",
       "title": "Senzing entity format",
@@ -42,7 +42,7 @@
     },
     {
       "name": "source.xls",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/source.xls",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/source.xls",
       "checksum": "37f4faeb9fb92a1621353a9b86bcee8fd5c65eae",
       "mime_type": "application/vnd.ms-excel",
       "mime_type_label": "Microsoft Excel",
@@ -52,8 +52,8 @@
     },
     {
       "name": "statistics.json",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/statistics.json",
-      "checksum": "ef8aecf1fa3c937fd94a0e5a79cca9e1283548fd",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/statistics.json",
+      "checksum": "71dea11a8ca5520194113c83a0ed7417beacb21c",
       "mime_type": "application/json",
       "mime_type_label": "JavaScript Object Notation",
       "title": "Dataset statistics",
@@ -62,8 +62,8 @@
     },
     {
       "name": "targets.nested.json",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/targets.nested.json",
-      "checksum": "5a440aa21e9a1854737c6a89e2f3e3a3e0173393",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/targets.nested.json",
+      "checksum": "cbad699d47212224b1b6cf104ab985128176f59a",
       "mime_type": "application/json",
       "mime_type_label": "JavaScript Object Notation",
       "title": "Targets as nested JSON",
@@ -72,7 +72,7 @@
     },
     {
       "name": "targets.simple.csv",
-      "url": "https://data.opensanctions.org/datasets/20250116/ae_local_terrorists/targets.simple.csv",
+      "url": "https://data.opensanctions.org/datasets/20250117/ae_local_terrorists/targets.simple.csv",
       "checksum": "f0f249e0bc7342148c2ae1d65f40cef6a4062135",
       "mime_type": "text/csv",
       "mime_type_label": "Comma-separated table",
